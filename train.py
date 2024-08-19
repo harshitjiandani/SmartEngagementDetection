@@ -6,7 +6,6 @@ from sklearn.linear_model import LogisticRegression, RidgeClassifier
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.neighbors import KNeighborsClassifier
 import argparse, os, pickle
-from sutils import setup_args
 from sutils.image_utils import load_images ,detectPose
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay,classification_report

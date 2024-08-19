@@ -1,8 +1,10 @@
 from sutils.image_utils import detectPose
 import os ,pickle
 
-model_dir = os.path.join(os.path.abspath(__file__), "models")
+model_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "models")
 loaded_models = {}
+
+
 
 def load(model ="knn"):
     for file_name in os.listdir(model_dir):
@@ -19,10 +21,14 @@ def load(model ="knn"):
 
 
 def pred(img, model ="knn"):
-    pose_row = detectPose(img)
+    print("ohwell")
+    pose_row = detectPose(img,batch=False)
+    print("pose works")
     working_model =load(model)
     y_pred = working_model.predict([pose_row])
-    print("engaged" if y_pred==1 else print("not engaged"))
+    classififcation =  "engaged" if y_pred==1 else "not engaged"
+    print(classififcation)
+    return classififcation
  
     
 

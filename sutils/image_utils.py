@@ -16,10 +16,7 @@ face_mesh = mp_face_mesh.FaceMesh(
 holistic = mp_holistic.Holistic(min_detection_confidence=0.5,  static_image_mode = True  , ) 
 
 
-
-
-
-def detectPose(image, label):
+def detectPose(image, label = "eng" , batch= True):
     """
     Perform pose detection on the input image.
 
@@ -50,12 +47,16 @@ def detectPose(image, label):
     try:
         allrows= []
         row = pose_row+face_row
-        row.insert(0, label)
+        if batch==False:
+            return row
         
-        allrows.append(row)
-        with open('posecordinates.csv', mode='a', newline='') as f:
-            csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            csv_writer.writerow(row)
+        else:
+            row.insert(0, label)
+            
+            allrows.append(row)
+            with open('posecordinates.csv', mode='a', newline='') as f:
+                csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                csv_writer.writerow(row)
             
             
     except:
