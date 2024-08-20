@@ -4,6 +4,8 @@ import numpy as np
 import mediapipe as mp 
 import csv
 import pandas as pd
+from numpy import ndarray
+
 
 mp_drawing = mp.solutions.drawing_utils 
 mp_holistic = mp.solutions.holistic 
@@ -15,17 +17,19 @@ face_mesh = mp_face_mesh.FaceMesh(
 )
 holistic = mp_holistic.Holistic(min_detection_confidence=0.5,  static_image_mode = True  , ) 
 
-
-def detectPose(image, label = "eng" , batch= True):
+def detectPose(image: ndarray, label :str = "eng" , batch : bool= True) :
     """
     Perform pose detection on the input image.
 
     Args:
         image: The input image for pose detection.
-        label: The label associated with the image.
+        label (str, optional): The label associated with the image.
+        batch (bool, optional): If True, appends the pose and face data to a CSV file. 
+                                 If False, returns the data as a list. Defaults to True.
 
     Returns:
-        None
+         Union[List[float], None]: Returns a list of pose and face landmarks if batch is False. 
+                                   Otherwise, returns None.
     """
 
     original_image = image.copy()
@@ -65,7 +69,7 @@ def detectPose(image, label = "eng" , batch= True):
 
 
 
-def load_images(img_path:str = os.path.join(os.getcwd(), 'images')):
+def load_images(img_path:str = os.path.join( os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'images')):
     """
    Load images from the specified directory, perform pose detection, and print results.
     
@@ -79,7 +83,7 @@ def load_images(img_path:str = os.path.join(os.getcwd(), 'images')):
         Exception: If an error occurs during file processing.
     """
 
-    label_dict = {"engaged": "eng", "not engaged": "noteng"}
+    label_dict = {"engaged": "eng", "notengaged": "noteng"}
     for folder_name in os.listdir(img_path):
         counter = 0
         label = label_dict.get(folder_name)
