@@ -39,8 +39,15 @@ python predict.py --image_path <IMAGE_PATH> --model <MODEL_TYPE>
 
 ## Train
 
-You can retrain the models by running
+### Models Trained
+
+The `train.py` script trains multiple models: Logistic Regression, Ridge Classifier, Random Forest, Gradient Boosting, and K-Nearest Neighbors. These models cover a range of classification techniques suitable for different data complexities.
+
+The script allows you to choose between using a pre-existing pose coordinates file or your own image dataset for training. This flexibility is important since the provided dataset is not the full version, enabling you to customize the training process according to your data availability.
+
 ```
-python train.py
+python train.py --pose_file <POSE_FILE_FLAG> --pose_csv <POSE_CSV> --img_folder <IMG_FOLDER>
 ```
+**Note**: YOLO (You Only Look Once) training is not provided in this script. If you wish to train YOLO for pose detection, you will need to create bounding boxes, fine-tune the model using Roboflow, and further refine it. Once done, replace the existing YOLO model in the `models` directory with your newly trained version.
+
 
