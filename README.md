@@ -48,6 +48,6 @@ The script allows you to choose between using a pre-existing pose coordinates fi
 ```
 python train.py --pose_file <POSE_FILE_FLAG> --pose_csv <POSE_CSV> --img_folder <IMG_FOLDER>
 ```
-**Note**: YOLO (You Only Look Once) training is not provided in this script. If you wish to train YOLO for pose detection, you will need to create bounding boxes, fine-tune the model using Roboflow, and further refine it. Once done, replace the existing YOLO model in the `models` directory with your newly trained version.
+**Note**: YOLO training is not provided in this script. If you wish to train YOLO for pose detection, you will need to create bounding boxes on your Datset, and fine-tune the model using YOLOv5 , and further refine it. Once done, replace the existing YOLO model in the `models` directory named `best.pt` with your newly trained version. 
 
 
